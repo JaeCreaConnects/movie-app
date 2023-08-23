@@ -2,12 +2,11 @@ package dev.jae.reviews;
 
 import dev.jae.movies.models.Movie;
 import dev.jae.reviews.models.Review;
-import dev.jae.reviews.repo.ReviewRepo;
 import dev.jae.reviews.service.ReviewService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -15,15 +14,12 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DataMongoTest
+@SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ReviewServiceIntegrationTest {
 
     @Autowired
     private ReviewService reviewService;
-
-    @Autowired
-    private ReviewRepo reviewRepo;
 
     @Autowired
     private MongoTemplate mongoTemplate;

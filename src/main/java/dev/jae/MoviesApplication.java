@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan({ "dev.jae.reviews", "dev.jae.movies"})
+@ComponentScan({ "dev.jae.movies","dev.jae.reviews"})
 public class MoviesApplication {
 
 	public static void main(String[] args) {
