@@ -9,11 +9,15 @@ import dev.jae.movies.service.ReviewService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 class MoviesApplicationTests {
+
+	@Autowired
+	private MongoTemplate mongoTemplate;
 
 	@Autowired
 	private MovieController movieController;
@@ -41,6 +45,7 @@ class MoviesApplicationTests {
 		assertNotNull(reviewService);
 		assertNotNull(movieRepo);
 		assertNotNull(reviewRepo);
+		assertNotNull(mongoTemplate);
 	}
 
 }
