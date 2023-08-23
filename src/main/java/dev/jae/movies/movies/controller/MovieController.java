@@ -2,6 +2,7 @@ package dev.jae.movies.movies.controller;
 
 import dev.jae.movies.models.Movie;
 import dev.jae.movies.service.MovieService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class MovieController {
     private final MovieService movieService;
 
+    @Autowired
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
     }
