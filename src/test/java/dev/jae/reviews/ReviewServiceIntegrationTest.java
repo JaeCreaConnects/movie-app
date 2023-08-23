@@ -44,8 +44,6 @@ public class ReviewServiceIntegrationTest {
         // Assert
         assertEquals(reviewBody, createdReview.getBody());
 
-        // Verify that the reviewRepo.insert was called
-
         // Verify that the movie document in MongoDB was updated
         Movie updatedMovie = mongoTemplate.findOne(
                 new Query(Criteria.where("imdbId").is(imdbId)), Movie.class);
