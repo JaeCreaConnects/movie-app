@@ -1,7 +1,7 @@
 package dev.jae.movies.service;
 
 import dev.jae.movies.models.Movie;
-import dev.jae.movies.models.repo.MovieRepo;
+import dev.jae.movies.repo.MovieRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

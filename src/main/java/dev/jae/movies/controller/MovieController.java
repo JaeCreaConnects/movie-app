@@ -1,4 +1,4 @@
-package dev.jae.movies.movies.controller;
+package dev.jae.movies.controller;
 
 import dev.jae.movies.models.Movie;
 import dev.jae.movies.service.MovieService;

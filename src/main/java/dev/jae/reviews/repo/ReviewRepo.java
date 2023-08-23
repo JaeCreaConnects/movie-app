@@ -1,6 +1,6 @@
-package dev.jae.movies.models.repo;
+package dev.jae.reviews.repo;
 
-import dev.jae.movies.models.Review;
+import dev.jae.reviews.models.Review;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;

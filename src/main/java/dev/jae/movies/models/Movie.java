@@ -1,5 +1,6 @@
 package dev.jae.movies.models;
 
+import dev.jae.reviews.models.Review;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,4 +36,15 @@ public class Movie {
 
     @DocumentReference
     private List<Review> reviewIds;
+
+    public Movie(ObjectId id, String imdbId, String title) {
+        this.id = id;
+        this.imdbId = imdbId;
+        this.title = title;
+    }
+
+    public Movie(String imdbId, String title) {
+        this.imdbId = imdbId;
+        this.title = title;
+    }
 }

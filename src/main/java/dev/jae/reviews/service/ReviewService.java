@@ -1,8 +1,8 @@
-package dev.jae.movies.service;
+package dev.jae.reviews.service;
 
 import dev.jae.movies.models.Movie;
-import dev.jae.movies.models.Review;
-import dev.jae.movies.models.repo.ReviewRepo;
+import dev.jae.reviews.models.Review;
+import dev.jae.reviews.repo.ReviewRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;

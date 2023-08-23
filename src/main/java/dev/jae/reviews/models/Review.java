@@ -1,4 +1,4 @@
-package dev.jae.movies.models;
+package dev.jae.reviews.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

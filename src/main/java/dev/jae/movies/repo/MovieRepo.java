@@ -1,4 +1,4 @@
-package dev.jae.movies.models.repo;
+package dev.jae.movies.repo;
 
 import dev.jae.movies.models.Movie;
 import org.bson.types.ObjectId;

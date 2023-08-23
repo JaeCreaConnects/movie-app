@@ -1,9 +1,11 @@
-package dev.jae.movies;
+package dev.jae;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan({ "dev.jae.reviews", "dev.jae.movies"})
 public class MoviesApplication {
 
 	public static void main(String[] args) {
