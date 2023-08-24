@@ -6,8 +6,6 @@ on:
       - '!master'
       - '!dev'
 jobs:
-  prettier:
-
   build-react-frontend:
     - name: Prettier Check
       runs-on: ubuntu-latest
