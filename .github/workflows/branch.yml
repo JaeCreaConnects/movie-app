@@ -18,11 +18,13 @@ jobs:
         uses: rutajdash/prettier-cli-action@v1.0.0
         with:
           config_path: ./frontend/src/.prettierrc
+
       - name: Prettier Output
         if: ${{ failure() }}
         shell: bash
         run: |
           echo "There were some files that were not formatted."
+
       - name: Use Node v.20.5.0
         uses: actions/setup-node@v1
         with:
