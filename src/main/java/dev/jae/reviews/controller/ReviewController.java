@@ -1,7 +1,7 @@
-package dev.jae.movies.movies.controller;
+package dev.jae.reviews.controller;
 
-import dev.jae.movies.models.Review;
-import dev.jae.movies.service.ReviewService;
+import dev.jae.reviews.models.Review;
+import dev.jae.reviews.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
