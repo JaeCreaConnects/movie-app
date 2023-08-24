@@ -4,38 +4,37 @@ on:
     branches:
       - dev
 jobs:
-  build-frontend:
-    build-react-frontend:
-      name: Build Frontend && Prettier Check
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout Code
-          uses: actions/checkout@v2
+  build-react-frontend:
+    name: Build Frontend && Prettier Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
-        - name: Run Prettier
-          id: prettier-run
-          uses: rutajdash/prettier-cli-action@v1.0.0
-          with:
-            config_path: ./frontend/src/.prettierrc
+      - name: Run Prettier
+        id: prettier-run
+        uses: rutajdash/prettier-cli-action@v1.0.0
+        with:
+          config_path: ./frontend/src/.prettierrc
 
-        - name: Prettier Output
-          if: ${{ failure() }}
-          shell: bash
-          run: |
-            echo "There were some files that were not formatted."
+      - name: Prettier Output
+        if: ${{ failure() }}
+        shell: bash
+        run: |
+          echo "There were some files that were not formatted."
 
-        - name: Use Node v.20.5.0
-          uses: actions/setup-node@v1
-          with:
-            node-version: 20.5.0
+      - name: Use Node v.20.5.0
+        uses: actions/setup-node@v1
+        with:
+          node-version: 20.5.0
 
-        - name: Install Node Packages
-          working-directory: ./frontend
-          run: npm install --ignore-engines
+      - name: Install Node Packages
+        working-directory: ./frontend
+        run: npm install --ignore-engines
 
-        - name: Run Frontend Tests
-          working-directory: ./frontend
-          run: npm run test --passWithNoTests
+      - name: Run Frontend Tests
+        working-directory: ./frontend
+        run: npm run test --passWithNoTests
 
   build-backend:
     name: Build Backend
