@@ -22,9 +22,9 @@ jobs:
         if: ${{ failure() }}
         shell: bash
         run: |
-          echo "The following files are not formatted:"
-          echo "${{steps.prettier-run.outputs.prettier_output}}"
-
+          echo "There were some files that were not formatted."
+        else:
+          echo "All files are formatted."
       - name: Use Node v.20.5.0
         uses: actions/setup-node@v1
         with:
