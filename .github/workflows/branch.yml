@@ -7,25 +7,24 @@ on:
       - '!dev'
 jobs:
   build-react-frontend:
-    - name: Build Frontend
-      runs-on: ubuntu-latest
+    name: Build Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
-      steps:
-        - name: Checkout Code
-          uses: actions/checkout@v2
+      - name: Use Node v.20.5.0
+        uses: actions/setup-node@v1
+        with:
+          node-version: 20.5.0
 
-        - name: Use Node v.20.5.0
-          uses: actions/setup-node@v1
-          with:
-            node-version: 20.5.0
+      - name: Install Node Packages
+        working-directory: ./frontend
+        run: npm install --ignore-engines
 
-        - name: Install Node Packages
-          working-directory: ./frontend
-          run: npm install --ignore-engines
-
-        - name: Run Frontend Tests
-          working-directory: ./frontend
-          run: npm run test --passWithNoTests
+      - name: Run Frontend Tests
+        working-directory: ./frontend
+        run: npm run test --passWithNoTests
 
   build-spring-backend:
     name: Build Backend
