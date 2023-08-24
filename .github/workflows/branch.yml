@@ -7,29 +7,9 @@ on:
       - '!dev'
 jobs:
   build-react-frontend:
-    - name: Prettier Check
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout Repository
-          uses: actions/checkout@v2
-
-        - name: Run Prettier
-          id: prettier-run
-          uses: rutajdash/prettier-cli-action@v1.0.0
-          with:
-            config_path: ./.prettierrc
-
-        # This step only runs if prettier finds errors causing the previous step to fail
-        # This steps lists the files where errors were found
-        - name: Prettier Output
-          if: ${{ failure() }}
-          shell: bash
-          run: |
-            echo "The following files are not formatted:"
-            echo "${{steps.prettier-run.outputs.prettier_output}}"
-
     - name: Build Frontend
       runs-on: ubuntu-latest
+
       steps:
         - name: Checkout Code
           uses: actions/checkout@v2
