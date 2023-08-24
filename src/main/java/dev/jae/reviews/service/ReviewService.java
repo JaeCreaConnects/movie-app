@@ -1,13 +1,15 @@
-package dev.jae.movies.service;
+package dev.jae.reviews.service;
 
 import dev.jae.movies.models.Movie;
-import dev.jae.movies.models.Review;
-import dev.jae.movies.models.repo.ReviewRepo;
+import dev.jae.reviews.models.Review;
+import dev.jae.reviews.repo.ReviewRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class ReviewService {
@@ -21,7 +23,8 @@ public class ReviewService {
     }
 
     public Review createReview(String reviewBody, String imdbId) {
-        Review review = reviewRepo.insert(new Review(reviewBody));
+        String newReviewId = UUID.randomUUID().toString();
+        Review review = reviewRepo.insert(new Review(reviewBody, newReviewId));
 
         //use template to update the movie class
         //each movie in db contains reviewIds array (empty)

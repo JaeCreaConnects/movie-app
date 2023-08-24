@@ -1,4 +1,4 @@
-package dev.jae.movies.models;
+package dev.jae.reviews.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +17,10 @@ public class Review {
 
     private String body;
 
-    public Review(String body) {
+    private String reviewId;
+
+    public Review(String body, String reviewId) {
         this.body = body;
+        this.reviewId = reviewId;
     }
 }
