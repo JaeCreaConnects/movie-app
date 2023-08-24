@@ -9,46 +9,45 @@ jobs:
   prettier:
 
   build-react-frontend:
-    name: Build Frontend
-    runs-on: ubuntu-latest
-    steps:
-      - name: Prettier Check
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout Repository
-            uses: actions/checkout@v2
+    - name: Prettier Check
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v2
 
-          - name: Run Prettier
-            id: prettier-run
-            uses: rutajdash/prettier-cli-action@v1.0.0
-            with:
-              config_path: ./.prettierrc
+        - name: Run Prettier
+          id: prettier-run
+          uses: rutajdash/prettier-cli-action@v1.0.0
+          with:
+            config_path: ./.prettierrc
 
-          # This step only runs if prettier finds errors causing the previous step to fail
-          # This steps lists the files where errors were found
-          - name: Prettier Output
-            if: ${{ failure() }}
-            shell: bash
-            run: |
-              echo "The following files are not formatted:"
-              echo "${{steps.prettier-run.outputs.prettier_output}}"
-      - name: Checkout Code
-        uses: actions/checkout@v2
+        # This step only runs if prettier finds errors causing the previous step to fail
+        # This steps lists the files where errors were found
+        - name: Prettier Output
+          if: ${{ failure() }}
+          shell: bash
+          run: |
+            echo "The following files are not formatted:"
+            echo "${{steps.prettier-run.outputs.prettier_output}}"
 
-      - name: Use Node v.20.5.0
-        uses: actions/setup-node@v1
-        with:
-          node-version: 20.5.0
+    - name: Build Frontend
+      runs-on: ubuntu-latest
+      steps:
+       - name: Checkout Code
+         uses: actions/checkout@v2
 
-      - name: Install Node Packages
-        working-directory: ./frontend
-        run: npm install --ignore-engines
+       - name: Use Node v.20.5.0
+         uses: actions/setup-node@v1
+         with:
+           node-version: 20.5.0
 
-      - name: Run Frontend Tests
-        working-directory: ./frontend
-        run: npm run test --passWithNoTests
+       - name: Install Node Packages
+         working-directory: ./frontend
+         run: npm install --ignore-engines
 
-
+       - name: Run Frontend Tests
+         working-directory: ./frontend
+         run: npm run test --passWithNoTests
 
   build-spring-backend:
     name: Build Backend
