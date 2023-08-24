@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class ReviewService {
     private final ReviewRepo reviewRepo;
@@ -21,7 +23,8 @@ public class ReviewService {
     }
 
     public Review createReview(String reviewBody, String imdbId) {
-        Review review = reviewRepo.insert(new Review(reviewBody));
+        String newReviewId = UUID.randomUUID().toString();
+        Review review = reviewRepo.insert(new Review(reviewBody, newReviewId));
 
         //use template to update the movie class
         //each movie in db contains reviewIds array (empty)
