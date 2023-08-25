@@ -5,7 +5,7 @@ on:
       - dev
 jobs:
   build-react-frontend:
-    name: Build Frontend && Prettier Check
+    name: Build Frontend and Prettier Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        mongodb-version: [ '4.2', '4.4', '5.0', '6.0' ]
+        mongodb-version: 6.0
 
     steps:
       - uses: actions/checkout@v2
@@ -61,8 +61,8 @@ jobs:
         uses: supercharge/mongodb-github-action@1.6.0
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
-          mongodb-username: ${{ secrets.MONGO_DB_USERNAME }}
-          mongodb-password: ${{ secrets.MONGO_DB_PASSWORD }}
+          mongodb-root-username: ${{ secrets.MONGO_DB_USERNAME }}
+          mongodb-root-password: ${{ secrets.MONGO_DB_PASSWORD }}
           mongodb-cluster: ${{ secrets.MONGO_DB_CLUSTER }}
 
       - name: Build and Test Project with Maven
