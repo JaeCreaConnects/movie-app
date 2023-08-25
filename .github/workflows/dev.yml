@@ -7,6 +7,9 @@ jobs:
   build-react-frontend:
     name: Build Frontend && Prettier Check
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        mongodb-version: ['4.2', '4.4', '5.0', '6.0']
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -53,6 +56,14 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.10.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
+          mongodb-username: ${{ secrets.MONGO_DB_USERNAME }}
+          mongodb-password: ${{ secrets.MONGO_DB_PASSWORD }}
+          mongodb-cluster: ${{ secrets.MONGO_DB_CLUSTER }}
 
       - name: Build and Test Project with Maven
         run: mvn -B package --file pom.xml
