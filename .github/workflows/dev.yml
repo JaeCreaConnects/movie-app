@@ -49,6 +49,9 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
+          MONGO_USERNAME: ${{ secrets.MONGO_DB_USERNAME}}
+          MONGO_PASSWORD: ${{ secrets.MONGO_DB_PASSWORD }}
+          MONGO_CLUSTER: ${{ secrets.MONGO_DB_CLUSTER }}
 
       - name: Cache the Maven packages to speed up build
         uses: actions/cache@v1
