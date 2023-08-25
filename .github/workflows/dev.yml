@@ -5,7 +5,7 @@ on:
       - dev
 jobs:
   build-react-frontend:
-    name: Build Frontend && Prettier Check
+    name: Build Frontend and Prettier Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -39,6 +39,9 @@ jobs:
   build-backend:
     name: Build Backend
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        mongodb-version: [ '6.0' ]
 
     steps:
       - uses: actions/checkout@v2
@@ -54,8 +57,27 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.6.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
+          mongodb-root-username: ${{ secrets.MONGO_DB_USERNAME }}
+          mongodb-root-password: ${{ secrets.MONGO_DB_PASSWORD }}
+          mongodb-cluster: ${{ secrets.MONGO_DB_CLUSTER }}
+
       - name: Build and Test Project with Maven
         run: mvn -B package --file pom.xml
+        env:
+          MONGO_DB: ${{ secrets.MONGO_DB }}
+          MONGO_USER: ${{ secrets.MONGO_DB_USERNAME }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_DB_PASSWORD }}
+          MONGO_CLUSTER: ${{ secrets.MONGO_DB_CLUSTER }}
 
       - name: Run Maven Install
         run: mvn clean install
+        env:
+          MONGO_DB: ${{ secrets.MONGO_DB }}
+          MONGO_USER: ${{ secrets.MONGO_DB_USERNAME }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_DB_PASSWORD }}
+          MONGO_CLUSTER: ${{ secrets.MONGO_DB_CLUSTER }}
