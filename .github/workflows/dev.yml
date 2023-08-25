@@ -71,7 +71,7 @@ jobs:
         env:
           MONGO_DB: ${{ secrets.MONGO_DB }}
           MONGO_PASSWORD: ${{ secrets.MONGO_DB_PASSWORD }}
-          MONGO_USERNAME: ${{ secrets.MONGO_DB_USERNAME }}
+          MONGO_USER: ${{ secrets.MONGO_DB_USERNAME }}
           MONGO_CLUSTER: ${{ secrets.MONGO_DB_CLUSTER }}
 
       - name: Run Maven Install
