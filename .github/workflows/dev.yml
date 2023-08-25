@@ -58,7 +58,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.10.0
+        uses: supercharge/mongodb-github-action@1.6.0
         with:
           mongodb-version: ${{ matrix.mongodb-version }}
           mongodb-username: ${{ secrets.MONGO_DB_USERNAME }}
