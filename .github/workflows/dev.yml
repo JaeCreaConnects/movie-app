@@ -70,9 +70,14 @@ jobs:
         run: mvn -B package --file pom.xml
         env:
           MONGO_DB: ${{ secrets.MONGO_DB }}
-          MONGO_PASSWORD: ${{ secrets.MONGO_DB_PASSWORD }}
           MONGO_USER: ${{ secrets.MONGO_DB_USERNAME }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_DB_PASSWORD }}
           MONGO_CLUSTER: ${{ secrets.MONGO_DB_CLUSTER }}
 
       - name: Run Maven Install
         run: mvn clean install
+        env:
+          MONGO_DB: ${{ secrets.MONGO_DB }}
+          MONGO_USER: ${{ secrets.MONGO_DB_USERNAME }}
+          MONGO_PASSWORD: ${{ secrets.MONGO_DB_PASSWORD }}
+          MONGO_CLUSTER: ${{ secrets.MONGO_DB_CLUSTER }}
