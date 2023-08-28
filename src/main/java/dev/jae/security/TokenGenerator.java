@@ -21,10 +21,9 @@ public class TokenGenerator {
 
     private final JwtEncoder accessTokenEncoder;
 
-    @Qualifier("jwtRefreshTokenEncoder")
     private final JwtEncoder refreshTokenEncoder;
 
-    public TokenGenerator(JwtEncoder accessTokenEncoder, JwtEncoder refreshToken) {
+    public TokenGenerator(JwtEncoder accessTokenEncoder, @Qualifier("jwtRefreshTokenEncoder")JwtEncoder refreshToken) {
         this.accessTokenEncoder = accessTokenEncoder;
         this.refreshTokenEncoder = refreshToken;
     }
@@ -68,21 +67,18 @@ public class TokenGenerator {
 
         String refreshToken;
 
-        if (authentication.getCredentials() instanceof Jwt jwt){
+        if (authentication.getCredentials() instanceof Jwt jwt) {
             Instant now = Instant.now();
             Instant expiresAt = jwt.getExpiresAt();
             Duration duration = Duration.between(now, expiresAt);
-
             long daysUntilExpired = duration.toDays();
 
-            if (daysUntilExpired < 7){
+            if (daysUntilExpired < 7) {
                 refreshToken = createRefreshToken(authentication);
-            }
-            else{
+            } else {
                 refreshToken = jwt.getTokenValue();
             }
-        }
-        else{
+        } else {
             refreshToken = createRefreshToken(authentication);
         }
         token.setRefreshToken(refreshToken);

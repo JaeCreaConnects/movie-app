@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 @SpringBootApplication
 @ComponentScan({ "dev.jae.movies","dev.jae.reviews", "dev.jae.security", "dev.jae.users"})
 @EntityScan(basePackages = "dev.jae")

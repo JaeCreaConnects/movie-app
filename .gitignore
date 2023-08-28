@@ -3,9 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-access-token.private
-access-token.public
-access-refresh-token-keys
+
 
 ### STS ###
 .apt_generated

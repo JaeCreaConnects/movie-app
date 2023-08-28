@@ -1,7 +1,7 @@
 package dev.jae.security;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -21,36 +21,28 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @Component
+@Slf4j
 public class KeyUtils {
     private final Environment environment;
 
-    @Autowired
-    public KeyUtils(Environment environment) {
-        this.environment = environment;
-    }
-
-    @Value("access-token.private")
+    @Value("${access-token.private}")
     private String accessTokenPrivateKeyPath;
 
-    @Value("access-token.public")
+    @Value("${access-token.public}")
     private String accessTokenPublicKeyPath;
 
-    @Value("refresh-token.private")
+    @Value("${refresh-token.private}")
     private String refreshTokenPrivateKeyPath;
 
-    @Value("refresh-token.public")
+    @Value("${refresh-token.public}")
     private String refreshTokenPublicKeyPath;
 
     private KeyPair _accessTokenKeyPair;
     private KeyPair _refreshTokenKeyPair;
-
-
-    private KeyPair getAccessTokenKeyPair() {
-        if (Objects.isNull(_accessTokenKeyPair)) {
-            _accessTokenKeyPair = getKeyPair(accessTokenPublicKeyPath, accessTokenPrivateKeyPath);
-        }
-        return _accessTokenKeyPair;
+    public KeyUtils(Environment environment) {
+        this.environment = environment;
     }
+
 
     private KeyPair getKeyPair(String publicKeyPath, String privateKeyPath) throws RuntimeException {
         KeyPair keyPair;
@@ -59,6 +51,7 @@ public class KeyUtils {
         File privateKeyFile = new File(privateKeyPath);
 
         if (publicKeyFile.exists() && privateKeyFile.exists()) {
+            log.info("loading keys from file: Pub Key File {}, Private Key File {}", publicKeyFile, privateKeyFile);
             try {
                 KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 
@@ -96,6 +89,7 @@ public class KeyUtils {
         //generate public and private keys
         //create RSA key-pair generator
         try {
+            log.info("Generating new public and private keys: Public Key Path {}, Private Key Path {}", publicKeyPath, privateKeyPath);
             //these are public and private keys generated in memory only
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
             keyPairGenerator.initialize(2048);
@@ -121,6 +115,13 @@ public class KeyUtils {
             _refreshTokenKeyPair = getKeyPair(refreshTokenPublicKeyPath, refreshTokenPrivateKeyPath);
         }
         return _refreshTokenKeyPair;
+    }
+
+    private KeyPair getAccessTokenKeyPair() {
+        if (Objects.isNull(_accessTokenKeyPair)) {
+            _accessTokenKeyPair = getKeyPair(accessTokenPublicKeyPath, accessTokenPrivateKeyPath);
+        }
+        return _accessTokenKeyPair;
     }
 
     public RSAPublicKey getAccessTokenPublicKey() {
