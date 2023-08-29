@@ -7,6 +7,8 @@ import Home from './components/home/Home'
 import Header from './components/header/Header'
 import Trailer from './components/trailer/Trailer'
 import Reviews from './components/reviews/Reviews'
+import UserRegister from './components/register/UserRegister'
+import UserLogin from './components/login/UserLogin'
 
 function App() {
     const [movies, setMovies] = useState()
@@ -40,7 +42,8 @@ function App() {
     }
 
     useEffect(() => {
-        getMovies()
+        //TODO: move to api file and remove from app.js
+        getMovies().then((response) => console.log(response))
     }, [])
     return (
         <div className="App">
@@ -48,6 +51,8 @@ function App() {
             <Routes path="/" element={<Layout />}>
                 <Route path="/" element={<Home movies={movies} />} />
                 <Route path="/Trailer/:ytTrailerId" element={<Trailer />} />
+                <Route path="/register" element={<UserRegister />} />
+                <Route path="/login" element={<UserLogin />} />
                 <Route
                     path="/Reviews/:movieId"
                     element={
