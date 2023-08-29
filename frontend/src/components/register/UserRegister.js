@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import '../../css/Register.css'
 
 const UserRegister = () => {
     const [firstName, setFirstName] = useState()
@@ -9,8 +10,8 @@ const UserRegister = () => {
 
     return (
         <div className="register-wrapper">
-            <h1>Please Log In</h1>
-            <form>
+            <h1>Register</h1>
+            <form className="register-form">
                 <label>
                     <p>First Name</p>
                     <input
