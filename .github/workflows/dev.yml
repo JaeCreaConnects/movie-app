@@ -21,7 +21,7 @@ jobs:
         if: ${{ failure() }}
         shell: bash
         run: |
-          echo "There were some files that were not formatted."
+          echo "There were some files that were not formatted.  Please run prettier and re-commit."
 
       - name: Use Node v.20.5.0
         uses: actions/setup-node@v1

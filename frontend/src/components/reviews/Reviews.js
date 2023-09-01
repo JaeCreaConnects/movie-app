@@ -6,6 +6,9 @@ import axios from 'axios'
 import ReviewForm from './ReviewForm'
 
 const Reviews = ({ getMovieData, movie, reviews, setReviews }) => {
+    // So, in summary, useRef is being used here to facilitate the interaction with an HTML input element used for entering
+    // and submitting reviews in the Reviews component.
+    //this captures the input element
     const revText = useRef()
     const params = useParams()
     const movieId = params.movieId

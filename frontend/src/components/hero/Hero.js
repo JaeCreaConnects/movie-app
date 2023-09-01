@@ -11,6 +11,7 @@ import '../../css/Hero.css'
 
 const Hero = ({ movies }) => {
     const navigate = useNavigate()
+    console.log(movies)
 
     const reviews = (movieId) => {
         navigate(`/Reviews/${movieId}`)
